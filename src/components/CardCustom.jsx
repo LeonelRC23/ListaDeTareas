@@ -1,36 +1,24 @@
 import React, { useRef, useState } from 'react';
 import '../styles/cardCustom.css';
 import Task from './Task';
+import { setTaks } from '../services/task';
 
-const CardCustom = () => {
+const CardCustom = ({ task }) => {
   const [tarea, setTarea] = useState([]);
+
   const refInput = useRef();
+
   const onKeyEnter = (e) => {
     if (e.key == 'Enter') {
       if (e.target.value.trim().length !== 0) {
-        let object;
-        if (tarea.length == 0) {
-          object = {
-            id: 1,
-            desc: e.target.value.trim(),
-          };
-        } else {
-          object = {
-            id: tarea[tarea.length - 1].id + 1,
-            desc: e.target.value.trim(),
-          };
-        }
-        setTarea([...tarea, object]);
+        setTaks(e);
         refInput.current.value = '';
       } else {
         alert('Ingrese una tarea.');
       }
     }
   };
-  let deleteElement = (id) => {
-    let tareaAUX = [...tarea].filter((elm) => elm.id !== id);
-    setTarea(tareaAUX);
-  };
+
   return (
     <div className='d-flex justify-content-center align-items-center min-vh-100'>
       <div className='content p-5'>
@@ -46,11 +34,10 @@ const CardCustom = () => {
         </div>
         <div>
           <ul>
-            {tarea.map((element) => (
+            {task.map((element) => (
               <Task
                 task={element}
-                key={element.id}
-                deleteElement={deleteElement}
+                key={element._id}
               />
             ))}
           </ul>
