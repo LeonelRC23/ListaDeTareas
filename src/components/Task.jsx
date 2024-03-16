@@ -1,8 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { deleteElement } from '../services/task';
 
-const Task = ({ task }) => {
+const Task = ({ task, deleteElement }) => {
   return (
     <li className='d-flex justify-content-between my-2'>
       {task.name}

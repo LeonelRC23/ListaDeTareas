@@ -1,17 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import '../styles/cardCustom.css';
 import Task from './Task';
-import { setTaks } from '../services/task';
 
-const CardCustom = ({ task }) => {
-  const [tarea, setTarea] = useState([]);
-
+const CardCustom = ({ task, setTasks, deleteElement }) => {
   const refInput = useRef();
 
   const onKeyEnter = (e) => {
     if (e.key == 'Enter') {
       if (e.target.value.trim().length !== 0) {
-        setTaks(e);
+        setTasks(e);
         refInput.current.value = '';
       } else {
         alert('Ingrese una tarea.');
@@ -38,6 +35,7 @@ const CardCustom = ({ task }) => {
               <Task
                 task={element}
                 key={element._id}
+                deleteElement={deleteElement}
               />
             ))}
           </ul>

@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
 import './App.css';
 import CardCustom from './components/CardCustom';
-import { API_URL } from './constants/back';
-import { useGetTask } from './hook/useGetTask';
+import { useTask } from './hook/useGetTask';
 
 function App() {
-  const { task } = useGetTask();
+  const { task, setTasks, deleteElement } = useTask();
 
   if (!task) {
     return <h1>Cargando</h1>;
@@ -13,7 +11,11 @@ function App() {
 
   return (
     <>
-      <CardCustom task={task} />
+      <CardCustom
+        task={task}
+        setTasks={setTasks}
+        deleteElement={deleteElement}
+      />
     </>
   );
 }
